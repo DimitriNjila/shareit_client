@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Login from './components/Login';
+
+import { Login } from './components';
 import Home from './container/Home';
 
 const App = () => {
-  return <Routes>
-    <Route path="login" element={<Login />} />
-    <Route path="/" element={<Home />} />
-  </Routes>
-}
+  const navigate = useNavigate();
 
-export default App
+  useEffect(() => {
+    const User = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+
+    if (!User) navigate('/login');
+  }, []);
+
+  return (
+    <Routes>
+      <Route path="login" element={<Login />} />
+      <Route path="/*" element={<Home />} />
+    </Routes>
+  );
+};
+
+export default App;

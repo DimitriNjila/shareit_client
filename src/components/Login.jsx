@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import GoogleLogin  from 'react-google-login'
+import { gapi } from 'gapi-script';
 import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import shareVideo from '../assets/share.mp4'
 import Logo from '../assets/logowhite.png'
-
 import { client } from '../client'
 
 
@@ -23,8 +23,17 @@ const Login = () => {
 
     client.createIfNotExists(doc).then(() => {navigate('/', { replace: true })})
   }
+  // useEffect(() => {
+  //   const initClient = () => {
+  //     gapi.client.init({
+  //       clientId: `${process.env.REACT_APP_GOOGLE_API_TOKEN}`,
+  //       scope: '',
+  //     });
+  //   };
+  //   gapi.load('client:auth2', initClient);
+  // });
   return (
-    <div className='flex justify-start items-center felx-col h-screen'>
+    <div className='flex flex-col items-center justify-start h-screen'>
       <div className='relative w-full h-full'>
         <video
           src={shareVideo}
@@ -33,9 +42,9 @@ const Login = () => {
           controls={false}
           muted={true}
           autoPlay
-          className='w-full h-full object-cover'
+          className='object-cover w-full h-full'
         />
-        <div className='absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0 bg-blackOverlay'>
+        <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center bg-blackOverlay'>
           <div className='p-5'>
             <img src={Logo} alt='logo' width='130px' />
           </div>
@@ -46,7 +55,7 @@ const Login = () => {
                 <button
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
-                  className='bg-mainColor flex justify-center items-center bg-white text-black py-2 px-4 rounded-lg cursor-pointer outline-none'
+                  className='flex items-center justify-center px-4 py-2 text-black rounded-lg outline-none cursor-pointer bg-mainColor'
                 >
                   <FcGoogle className='mr-4' /> Sign in with Google
                 </button>
