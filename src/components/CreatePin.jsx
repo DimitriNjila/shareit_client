@@ -76,13 +76,13 @@ const CreatePin = ({ user }) => {
     }
   };
   return (
-    <div className="flex flex-col justify-center items-center mt-5 lg:h-4/5">
+    <div className="flex flex-col items-center justify-center mt-5 lg:h-4/5">
       {fields && (
-        <p className="text-red-500 mb-5 text-xl transition-all duration-150 ease-in ">Please add all fields.</p>
+        <p className="mb-5 text-xl text-red-500 transition-all duration-150 ease-in ">Please add all fields.</p>
       )}
-      <div className=" flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5  w-full">
+      <div className="flex flex-col items-center justify-center w-full p-3 bg-white lg:flex-row lg:p-5 lg:w-4/5">
         <div className="bg-secondaryColor p-3 flex flex-0.7 w-full">
-          <div className=" flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420">
+          <div className="flex flex-col items-center justify-center w-full p-3 border-2 border-gray-300 border-dotted h-420">
             {loading && (
               <Spinner />
             )}
@@ -94,8 +94,8 @@ const CreatePin = ({ user }) => {
             {!imageAsset ? (
               <label>
                 <div className="flex flex-col items-center justify-center h-full">
-                  <div className="flex flex-col justify-center items-center">
-                    <p className="font-bold text-2xl">
+                  <div className="flex flex-col items-center justify-center">
+                    <p className="text-2xl font-bold">
                       <AiOutlineCloudUpload />
                     </p>
                     <p className="text-lg">Click to upload</p>
@@ -117,11 +117,11 @@ const CreatePin = ({ user }) => {
                 <img
                   src={imageAsset?.url}
                   alt="uploaded-pic"
-                  className="h-full w-full"
+                  className="w-full h-full"
                 />
                 <button
                   type="button"
-                  className="absolute bottom-3 right-3 p-3 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
+                  className="absolute p-3 text-xl transition-all duration-500 ease-in-out bg-white rounded-full outline-none cursor-pointer bottom-3 right-3 hover:shadow-md"
                   onClick={() => setImageAsset(null)}
                 >
                   <MdDelete />
@@ -131,16 +131,17 @@ const CreatePin = ({ user }) => {
           </div>
         </div>
 
-        <div className="flex flex-1 flex-col gap-6 lg:pl-5 mt-5 w-full">
+        <div className="flex flex-col flex-1 w-full gap-6 mt-5 lg:pl-5">
           <input
+            key="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Add your title"
-            className="outline-none text-2xl sm:text-3xl font-bold border-b-2 border-gray-200 p-2"
+            className="p-2 text-2xl font-bold border-b-2 border-gray-200 outline-none sm:text-3xl"
           />
           {user && (
-            <div className="flex gap-2 mt-2 mb-2 items-center bg-white rounded-lg ">
+            <div className="flex items-center gap-2 mt-2 mb-2 bg-white rounded-lg ">
               <img
                 src={user.image}
                 className="w-10 h-10 rounded-full"
@@ -150,18 +151,20 @@ const CreatePin = ({ user }) => {
             </div>
           )}
           <input
+            key="about"
             type="text"
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             placeholder="Tell everyone what your Pin is about"
-            className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2"
+            className="p-2 text-base border-b-2 border-gray-200 outline-none sm:text-lg"
           />
           <input
+            key="destination"
             type="url"
-            vlaue={destination}
+            value={destination}
             onChange={(e) => setDestination(e.target.value)}
             placeholder="Add a destination link"
-            className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2"
+            className="p-2 text-base border-b-2 border-gray-200 outline-none sm:text-lg"
           />
 
           <div className="flex flex-col">
@@ -171,21 +174,21 @@ const CreatePin = ({ user }) => {
                 onChange={(e) => {
                   setCategory(e.target.value);
                 }}
-                className="outline-none w-4/5 text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
+                className="w-4/5 p-2 text-base border-b-2 border-gray-200 rounded-md outline-none cursor-pointer"
               >
-                <option value="others" className="sm:text-bg bg-white">Select Category</option>
+                <option value="others" className="bg-white sm:text-bg">Select Category</option>
                 {categories.map((item) => (
-                  <option className="text-base border-0 outline-none capitalize bg-white text-black " value={item.name}>
+                  <option className="text-base text-black capitalize bg-white border-0 outline-none " value={item.name}>
                     {item.name}
                   </option>
                 ))}
               </select>
             </div>
-            <div className="flex justify-end items-end mt-5">
+            <div className="flex items-end justify-end mt-5">
               <button
                 type="button"
                 onClick={savePin}
-                className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none"
+                className="p-2 font-bold text-white bg-red-500 rounded-full outline-none w-28"
               >
                 Save Pin
               </button>
