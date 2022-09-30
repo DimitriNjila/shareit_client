@@ -1,6 +1,6 @@
 # ShareMe Photo Sharing Application
 
-## Built using React TailwindCSS and Sanity io for backend
+## CRUD application built using React TailwindCSS and Sanity io for backend
 
 ## Implemented user login and logout using react-google-login
 
